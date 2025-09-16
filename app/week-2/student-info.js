@@ -2,11 +2,11 @@ import React from "react";
 
 const StudentInfo = () => {
   const student = {
-    name: "John Doe",
-    studentId: "S123456",
+    name: "Uvesh Ghanchi",
+    studentId: "000951957",
     program: "Software Development Diploma",
     semester: "Fall 2025",
-    email: "johndoe@example.com",
+    email: "ghanchiuvesh898@gmail.com",
   };
 
   return (
