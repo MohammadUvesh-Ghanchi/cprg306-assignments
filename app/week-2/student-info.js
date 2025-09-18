@@ -10,9 +10,9 @@ const StudentInfo = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white shadow-lg rounded-2xl p-6 border">
-      <h2 className="text-2xl font-bold text-blue-600 mb-4">Student Information</h2>
-      <ul className="space-y-2 text-gray-700">
+    <div >
+      <h2 >Student Information</h2>
+      <ul >
         <li><strong>Name:</strong> {student.name}</li>
         <li><strong>Student ID:</strong> {student.studentId}</li>
         <li><strong>Program:</strong> {student.program}</li>
