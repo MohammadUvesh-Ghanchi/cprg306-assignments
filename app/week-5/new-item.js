@@ -23,14 +23,26 @@ export default function NewItem() {
     setCategory("produce");
   };
 
+  // Handle quantity change with limit
+  const handleQuantityChange = (e) => {
+    const value = Number(e.target.value);
+    if (value >= 1 && value <= 20) {
+      setQuantity(value);
+    } else if (value > 20) {
+      setQuantity(20);
+    } else {
+      setQuantity(1);
+    }
+  };
+
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 to-purple-100 px-4">
-      <div className="bg-white shadow-xl rounded-3xl p-8 w-full max-w-lg transition-transform hover:scale-[1.02]">
-        <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">
-           Add a New Item
+    <div className="flex justify-center items-center min-h-screen px-4">
+      <div className="bg-white shadow-xl rounded-3xl p-8 w-full max-w-lg transition-transform hover:scale-[1.1]">
+        <h2 className="text-3xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-500 mb-6 tracking-wide">
+          Add a New Item
         </h2>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-6">
           {/* Item Name */}
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -49,15 +61,19 @@ export default function NewItem() {
           {/* Quantity */}
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
-              Quantity
+              Quantity (1–20)
             </label>
             <input
               type="number"
               min="1"
+              max="20"
               value={quantity}
-              onChange={(e) => setQuantity(Number(e.target.value))}
+              onChange={handleQuantityChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-purple-400 transition"
             />
+            <p className="text-xs text-gray-500 mt-1">
+              Quantity must be between 1 and 20.
+            </p>
           </div>
 
           {/* Category */}
@@ -87,7 +103,7 @@ export default function NewItem() {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold py-2.5 rounded-xl shadow-md hover:opacity-90 active:scale-95 transition"
+            className="w-full bg-gradient-to-r from-purple-600 to-blue-500 text-white font-semibold py-2.5 rounded-xl shadow-md hover:opacity-90 active:scale-95 transition"
           >
             Add Item
           </button>
