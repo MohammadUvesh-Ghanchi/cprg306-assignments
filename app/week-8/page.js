@@ -25,7 +25,7 @@ export default function Page() {
   }
 
   return (
-    <main className="p-6 bg-slate-950 min-h-screen text-white">
+    <main className="p-6 bg-slate-950 min-h-screen text-black">
       <h1 className="text-4xl font-bold text-indigo-400 mb-6">
         Shopping List + Meal Ideas
       </h1>
