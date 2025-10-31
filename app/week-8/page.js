@@ -4,8 +4,9 @@ import { useState } from "react";
 import NewItem from "./new-item";
 import ItemList from "./item-list";
 import MealIdeas from "./meal-ideas";
+import itemsData from "./items.json";
 
-// ✅ Function to remove emojis
+
 function removeEmojis(str) {
   return str.replace(
     /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|\uD83E[\uDD00-\uDDFF])/g,
@@ -14,13 +15,18 @@ function removeEmojis(str) {
 }
 
 export default function Page() {
+
+  const [items, setItems] = useState(itemsData);
   const [selectedItemName, setSelectedItemName] = useState("");
 
-  function handleItemSelect(item) {
-    let cleanedName = item.name.split(",")[0]; 
-    cleanedName = removeEmojis(cleanedName);
-    cleanedName = cleanedName.trim().toLowerCase();
+  function handleAddItem(newItem) {
+    const id = (crypto?.randomUUID && crypto.randomUUID()) || Date.now();
+    setItems((prev) => [{ id, ...newItem }, ...prev]);
+  }
 
+  function handleItemSelect(item) {
+    let cleanedName = item.name.split(",")[0];
+    cleanedName = removeEmojis(cleanedName).trim().toLowerCase();
     setSelectedItemName(cleanedName);
   }
 
@@ -32,8 +38,9 @@ export default function Page() {
 
       <div className="flex gap-6">
         <div className="w-1/2 space-y-4">
-          <NewItem />
-          <ItemList onItemSelect={handleItemSelect} />
+          <NewItem onAddItem={handleAddItem} />
+          
+          <ItemList items={items} onItemSelect={handleItemSelect} />
         </div>
 
         <div className="w-1/2">
