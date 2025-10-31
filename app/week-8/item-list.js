@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Item from "./item.js";
+import Item from "./item";
+import items from "./items.json";
 
-export default function ItemList({ items }) {
+export default function ItemList({ onItemSelect }) {
   const [sortBy, setSortBy] = useState("name");
 
   const sortedItems = [...items].sort((a, b) => {
@@ -13,30 +14,32 @@ export default function ItemList({ items }) {
   });
 
   return (
-    <div className="p-4 w-full max-w-md">
-      <div className="mb-4 text-black space-x-3">
+    <div className="p-4 bg-slate-900 rounded-lg w-full">
+      <div className="mb-4 text-white space-x-3">
         <button
           onClick={() => setSortBy("name")}
-          className={`px-4 py-2 rounded-lg ${
-            sortBy === "name" ? "bg-blue-600 text-white" : "bg-gray-200"
-          }`}
+          className="px-4 py-2 bg-indigo-500 rounded"
         >
           Sort by Name
         </button>
 
         <button
           onClick={() => setSortBy("category")}
-          className={`px-4 py-2 rounded-lg ${
-            sortBy === "category" ? "bg-blue-600 text-white" : "bg-gray-200"
-          }`}
+          className="px-4 py-2 bg-indigo-500 rounded"
         >
           Sort by Category
         </button>
       </div>
 
-      <ul className="space-y-2">
+      <ul>
         {sortedItems.map((item) => (
-          <Item key={item.id} {...item} />
+          <Item
+            key={item.id}
+            name={item.name}
+            quantity={item.quantity}
+            category={item.category}
+            onSelect={() => onItemSelect(item)}
+          />
         ))}
       </ul>
     </div>
