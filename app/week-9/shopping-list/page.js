@@ -11,7 +11,6 @@ export default function ShoppingListPage() {
   const { user, firebaseSignOut } = useUserAuth();
   const [selectedItem, setSelectedItem] = useState(null);
 
-  // Protect the page
   if (!user) {
     return redirect("/week-9");
   }

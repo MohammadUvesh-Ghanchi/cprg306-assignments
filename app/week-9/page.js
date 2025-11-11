@@ -22,7 +22,6 @@ export default function Page() {
     <div className="p-8 text-white">
       <h1 className="text-3xl font-bold mb-4">Week 9 — Login Page</h1>
 
-      {/* If user is NOT logged in */}
       {!user && (
         <>
           <p className="mb-4">You are not logged in.</p>
@@ -35,7 +34,6 @@ export default function Page() {
         </>
       )}
 
-      {/* If user IS logged in */}
       {user && (
         <>
           <p className="mb-4">
