@@ -1,5 +1,5 @@
 import "./globals.css";
-import { AuthContextProvider } from "./contexts/AuthContext";
+import AuthProviderWrapper from "./AuthProviderWrapper";
 
 export const metadata = {
   title: "CPRG 306 Assignments",
@@ -10,9 +10,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="bg-slate-900 min-h-screen p-8">
-        <AuthContextProvider>
+        <AuthProviderWrapper>
           {children}
-        </AuthContextProvider>
+        </AuthProviderWrapper>
       </body>
     </html>
   );
