@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useUserAuth } from "../contexts/AuthContext";
+import { useUserAuth } from "../../contexts/AuthContext";
+
+
 
 export default function Page() {
   const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
@@ -28,7 +30,7 @@ export default function Page() {
   };
 
   return (
-    <div style={{ padding: 20 }}>
+    <div style={{ padding: 20 }} className="text white bg-slate-900 p-4 rounded-lg">
       <h1>Week 9 — Login Page</h1>
 
       {!user && <button onClick={handleLogin}>Login with GitHub</button>}
