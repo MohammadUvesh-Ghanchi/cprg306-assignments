@@ -13,6 +13,7 @@ export default function Page() {
       console.log(err);
     }
   };
+
   if (!user) {
     return (
       <div style={{ padding: 20 }}>
@@ -21,6 +22,7 @@ export default function Page() {
       </div>
     );
   }
+
   const handleLogout = async () => {
     await firebaseSignOut();
   };
@@ -29,9 +31,7 @@ export default function Page() {
     <div style={{ padding: 20 }}>
       <h1>Week 9 — Login Page</h1>
 
-      {!user && (
-        <button onClick={handleLogin}>Login with GitHub</button>
-      )}
+      {!user && <button onClick={handleLogin}>Login with GitHub</button>}
 
       {user && (
         <>
@@ -39,7 +39,8 @@ export default function Page() {
             Welcome, {user.displayName} ({user.email})
           </p>
           <button onClick={handleLogout}>Logout</button>
-          <br /><br />
+          <br />
+          <br />
           <Link href="/week-9/shopping-list">Go to Shopping List →</Link>
         </>
       )}
