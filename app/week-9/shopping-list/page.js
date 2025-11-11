@@ -1,52 +1,48 @@
 "use client";
 
-import { useState } from "react";
-import NewItem from "./new-item";
-import ItemList from "./item-list";
-import MealIdeas from "./meal-ideas";
-import itemsData from "./items.json";
-
-
-function removeEmojis(str) {
-  return str.replace(
-    /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|\uD83E[\uDD00-\uDDFF])/g,
-    ""
-  );
-}
+import Link from "next/link";
+import { useUserAuth } from "../contexts/AuthContext";
 
 export default function Page() {
+  const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
 
-  const [items, setItems] = useState(itemsData);
-  const [selectedItemName, setSelectedItemName] = useState("");
-
-  function handleAddItem(newItem) {
-    const id = (crypto?.randomUUID && crypto.randomUUID()) || Date.now();
-    setItems((prev) => [{ id, ...newItem }, ...prev]);
+  const handleLogin = async () => {
+    try {
+      await gitHubSignIn();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  if (!user) {
+    return (
+      <div style={{ padding: 20 }}>
+        <h2>You must be logged in to view this page.</h2>
+        <a href="/week-9">Go to Login Page</a>
+      </div>
+    );
   }
-
-  function handleItemSelect(item) {
-    let cleanedName = item.name.split(",")[0];
-    cleanedName = removeEmojis(cleanedName).trim().toLowerCase();
-    setSelectedItemName(cleanedName);
-  }
+  const handleLogout = async () => {
+    await firebaseSignOut();
+  };
 
   return (
-    <main className="p-6 bg-slate-950 min-h-screen text-black">
-      <h1 className="text-4xl font-bold text-indigo-400 mb-6">
-        Shopping List + Meal Ideas
-      </h1>
+    <div style={{ padding: 20 }}>
+      <h1>Week 9 — Login Page</h1>
 
-      <div className="flex gap-6">
-        <div className="w-1/2 space-y-4">
-          <NewItem onAddItem={handleAddItem} />
-          
-          <ItemList items={items} onItemSelect={handleItemSelect} />
-        </div>
+      {!user && (
+        <button onClick={handleLogin}>Login with GitHub</button>
+      )}
 
-        <div className="w-1/2">
-          <MealIdeas ingredient={selectedItemName} />
-        </div>
-      </div>
-    </main>
+      {user && (
+        <>
+          <p>
+            Welcome, {user.displayName} ({user.email})
+          </p>
+          <button onClick={handleLogout}>Logout</button>
+          <br /><br />
+          <Link href="/week-9/shopping-list">Go to Shopping List →</Link>
+        </>
+      )}
+    </div>
   );
 }
