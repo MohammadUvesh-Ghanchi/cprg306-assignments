@@ -49,7 +49,7 @@ export default function Page() {
           <br />
           <br />
 
-          <Link href="/week-9/shopping-list" className="underline">
+          <Link href="/week-10/shopping-list" className="underline">
             Go to Shopping List →
           </Link>
         </>
