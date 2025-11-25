@@ -5,11 +5,8 @@ import { useUserAuth } from "../../contexts/AuthContext";
 import ItemList from "./item-list";
 import MealIdeas from "./meal-ideas";
 import { useState, useEffect } from "react";
-// Note: Ensure the path in this import (../../utils/firebase) has been corrected 
-// in the actual shopping-list-service.js file to resolve the module error.
 import { getItems, addItem } from "../_services/shopping-list-service"; 
 
-// Define inline SVG icons needed for the shopping list page
 const LogOutIcon = ({ size = 20, className = "" }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
